@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>QA Demo Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 520px; margin: 60px auto; padding: 24px; color: #172337; }
+        main { border: 1px solid #d7e0eb; border-radius: 12px; padding: 28px; }
+        label { display: block; margin: 14px 0 6px; }
+        input { box-sizing: border-box; width: 100%; padding: 11px; border: 1px solid #9baabd; border-radius: 6px; }
+        button { margin-top: 18px; padding: 11px 16px; border: 0; border-radius: 6px; background: #087f70; color: white; cursor: pointer; }
+        #message { margin-top: 16px; min-height: 22px; }
+    </style>
+</head>
+<body>
+<main>
+    <h1>Demo account sign-in</h1>
+    <p>This local page is a safe test target for the automation framework.</p>
+    <form id="loginForm">
+        <label for="username">Username</label>
+        <input id="username" name="username" autocomplete="username">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password">
+        <button type="submit" id="loginButton">Sign in</button>
+    </form>
+    <p id="message" role="status" aria-live="polite"></p>
+</main>
+<script>
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value;
+        const message = document.getElementById("message");
+
+        if (!username || !password) {
+            message.textContent = "Please enter both username and password.";
+            message.dataset.status = "error";
+            return;
+        }
+
+        if (username === "qa-demo" && password === "Passw0rd!") {
+            message.textContent = "Welcome, qa-demo!";
+            message.dataset.status = "success";
+        } else {
+            message.textContent = "Invalid username or password.";
+            message.dataset.status = "error";
+        }
+    });
+</script>
+</body>
+</html>
